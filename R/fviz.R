@@ -244,13 +244,16 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
     if(is.null(ggp)) p <-ggplot()+geom_blank(data = df, aes_string("x","y"))
     else p <- ggp
   }
-  else p <- ggpubr::ggscatter(data = df, x = "x", y = "y",
-                         color = color, fill = fill,  alpha = alpha, shape = pointshape, 
-                         point = point, size = pointsize, mean.point = mean.point,
-                         label = label, font.label = labelsize*3, repel = repel,
-                         ellipse = addEllipses, ellipse.type = ellipse.type,
-                         ellipse.alpha = ellipse.alpha, ellipse.level = ellipse.level,
-                         main = title, ggtheme = ggtheme, ggp = ggp, font.family = font.family, ...)
+  else {
+    p <- ggpubr::ggscatter(data = df, x = "x", y = "y",
+                             color = color, fill = fill,  alpha = alpha, shape = pointshape, 
+                             point = point, size = pointsize, mean.point = mean.point,
+                             #label = label, font.label = labelsize*3, repel = repel,
+                             #font.label = labelsize*3, repel = repel,
+                             ellipse = addEllipses, ellipse.type = ellipse.type,
+                             ellipse.alpha = ellipse.alpha, ellipse.level = ellipse.level,
+                             main = title, ggtheme = ggtheme, ggp = ggp, font.family = font.family, ...)
+  }
   if(alpha %in% c("cos2","contrib", "coord", "x", "y"))
     p <- p + scale_alpha(limits = range(df.all[, alpha]))
   
@@ -281,8 +284,9 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
     xx$y <- yy$mean
     grp_coord <- xx
    
-    p <- p+ggpubr::geom_exec(geom_text, data = grp_coord, x = "x", y = "y",
-                             label = "Groups", color = color) 
+   p <- p+ggpubr::geom_exec(geom_text, data = grp_coord, x = "x", y = "y",
+                            label = "Groups", color = color) 
+
     p <- p + facet_wrap(~facet_vars) + theme(legend.position = "none") 
   }
   
