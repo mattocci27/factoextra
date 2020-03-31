@@ -261,7 +261,7 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
     p <- p + ggpubr::gradient_color(gradient.cols)
     
     
-  if(is.null(extra_args$legend)) p <- p + theme(legend.position = "right" )
+  if(is.null(extra_args$legend)) p <- p + theme(legend.position = "bottomleft" )
   # Add arrows
   if("arrow" %in% geom & !hide[[element]]) 
     p <- p + .arrows(data = df, color = color, alpha = alpha, size = arrowsize)
