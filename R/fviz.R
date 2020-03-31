@@ -247,12 +247,13 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
   else {
     p <- ggpubr::ggscatter(data = df, x = "x", y = "y",
                              color = color, fill = fill,  alpha = alpha, shape = pointshape, 
-                             point = point, size = pointsize, mean.point = mean.point,
+                             point = point, size = pointsize, 
+                             #mean.point = mean.point,
                              #label = label, font.label = labelsize*3, repel = repel,
                              #font.label = labelsize*3, repel = repel,
                              ellipse = addEllipses, ellipse.type = ellipse.type,
                              ellipse.alpha = ellipse.alpha, ellipse.level = ellipse.level,
-                             main = title, ggtheme = ggtheme, ggp = ggp, font.family = font.family, ...)
+                             main = title, ggtheme = ggtheme, ggp = ggp, font.family = font.family, ...) 
   }
   if(alpha %in% c("cos2","contrib", "coord", "x", "y"))
     p <- p + scale_alpha(limits = range(df.all[, alpha]))
@@ -261,7 +262,7 @@ fviz <- function(X, element, axes = c(1, 2), geom = "auto",
     p <- p + ggpubr::gradient_color(gradient.cols)
     
     
-  if(is.null(extra_args$legend)) p <- p + theme(legend.position = "bottomleft" )
+  if(is.null(extra_args$legend)) p <- p + theme(legend.position = "right")
   # Add arrows
   if("arrow" %in% geom & !hide[[element]]) 
     p <- p + .arrows(data = df, color = color, alpha = alpha, size = arrowsize)
